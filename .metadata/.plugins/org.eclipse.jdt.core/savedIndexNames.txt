@@ -1,0 +1,1 @@
+INDEX VERSION 1.126+D:\Usuarios\Edu\Mis documentos\GitHub\Bravo-Eduardo-Programacion3\.metadata\.plugins\org.eclipse.jdt.core
