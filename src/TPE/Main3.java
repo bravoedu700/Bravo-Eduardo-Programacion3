@@ -81,12 +81,12 @@ public class Main3{
         
 	}
 	
-	public static void alta(Lista myList){
+	public static void alta(Lista myList, String path){
 		int tmn = myList.getTamanio()+1;
 		String resumen = "";
 		long totalTiempo = 0;
 		//String csvFile = "D:/Usuarios/Edu/Descargas/datasets/dataset_insert_10000.csv";
-		String csvFile = "/Users/fernandostoessel/Downloads/datasets/dataset_insert_10000.csv";
+		String csvFile = path + "dataset_insert_10000.csv";
         String line = "";
         String cvsSplitBy = ";";
         int ciclo = 0;
@@ -128,16 +128,16 @@ public class Main3{
         resumen += "Promedio Alta: " + (totalTiempo/ciclo) + " miliseg -";
         resumen += "Total Alta: "+getDurationBreakdown(totalTiempo) + "-";
         
-        escribirArchivo(resumen,"/Users/fernandostoessel/Downloads/datasets/salidaAltaListaFinal"+ tmn +".csv");
+        escribirArchivo(resumen,path + "salidaAltaListaFinal"+ tmn +".csv");
 	}
 	
-	public static void buscar(Lista myList){
+	public static void buscar(Lista myList, String path){
 		int tmn = myList.getTamanio()+1;
 		String resumen = "";
 		long totalTiempo = 0;
 		
 		//String csvFile = "D:/Usuarios/Edu/Descargas/datasets/dataset_insert_10000.csv";
-		String csvFile = "/Users/fernandostoessel/Downloads/datasets/dataset_busqueda_10000.csv";
+		String csvFile = path + "dataset_busqueda_10000.csv";
         String line = "";
         String cvsSplitBy = ";";
         int ciclo = 0;
@@ -186,25 +186,28 @@ public class Main3{
         resumen += "Promedio Busqueda: " + (totalTiempo/ciclo) + " miliseg -";
         resumen += "Total Busqueda: "+getDurationBreakdown(totalTiempo)+" -";
         
-        escribirArchivo(resumen,"/Users/fernandostoessel/Downloads/datasets/salidaBusquedaListaFinal"+tmn+".csv");
+        escribirArchivo(resumen,path + "salidaBusquedaListaFinal"+tmn+".csv");
 	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		String path = "D:/Usuarios/Edu/Descargas/datasets/";
+		//String path = "/Users/fernandostoessel/Downloads/datasets/";
+		
 		Lista mylista = new Lista();
-		cargar(mylista,"/Users/fernandostoessel/Downloads/datasets/dataset_500000.csv");
-		alta(mylista);
-		buscar(mylista);
+		cargar(mylista,path + "dataset_500000.csv");
+		alta(mylista,path);
+		buscar(mylista,path);
 		
 		mylista = new Lista();
-		cargar(mylista,"/Users/fernandostoessel/Downloads/datasets/dataset_1000000.csv");
-		alta(mylista);
-		buscar(mylista);
+		cargar(mylista,path + "dataset_1000000.csv");
+		alta(mylista,path);
+		buscar(mylista,path);
 		
 		mylista = new Lista();
-		cargar(mylista,"/Users/fernandostoessel/Downloads/datasets/dataset_3000000.csv");
-		alta(mylista);
-		buscar(mylista);
+		cargar(mylista,path + "dataset_3000000.csv");
+		alta(mylista,path);
+		buscar(mylista,path);
 	}
 
 }
