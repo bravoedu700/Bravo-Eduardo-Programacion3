@@ -1,29 +1,34 @@
 package TPE;
 
+//import javax.swing.*;
+ 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import javax.swing.*;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
+	
+	public static String getDurationBreakdown(long millis) {
+	    if(millis < 0) {
+	      throw new IllegalArgumentException("Duration must be greater than zero!");
+	    }
 
-	public static void cargar(Arreglo myArray){
-		 
-		JFrame frame = new JFrame("InputDialog Example #1");
+	    //long days = TimeUnit.MILLISECONDS.toDays(millis);
+	    //millis -= TimeUnit.DAYS.toMillis(days);
+	    //long hours = TimeUnit.MILLISECONDS.toHours(millis);
+	    //millis -= TimeUnit.HOURS.toMillis(hours);
+	    long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
+	    millis -= TimeUnit.MINUTES.toMillis(minutes);
+	    long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
 
-	    // prompt the user to enter their name
-	    String name = JOptionPane.showInputDialog(frame, "What's your name?");
+	    String sb = new String();
+	    sb=" Minutes: " + minutes +" Seconds: " + seconds;
+	    return sb;
+	}
 
-	    // get the user's input. note that if they press Cancel, 'name' will be null
-	    System.out.printf("The user's name is '%s'.\n", name);
-	    System.exit(0);
-	    
-		 
-		String csvFile = "/Users/fernandostoessel/Documents/facu/Bravo-Eduardo-Programacion3/src/DatosCSV/dataset_500000.csv";
+	public static void cargar(Arreglo myArray, String csvFile){
+	
         String line = "";
         String cvsSplitBy = ";";
 
@@ -31,9 +36,9 @@ public class Main {
         	BufferedReader br = new BufferedReader(new FileReader(csvFile));
         	//quito el primer elemento ya que es la cabezera 
         	line = br.readLine();
-        	while ((line = br.readLine()) != null) {
-
+        	while ((line = br.readLine()) != null) {        		
                 String[] items = line.split(cvsSplitBy);
+                //System.out.println(items[0]);
                 //creo la persona con sus gustos
                 Persona myPersona = new Persona(5); 
                 myPersona.setId(Integer.parseInt(items[0]));
@@ -41,9 +46,7 @@ public class Main {
                 for(int y=1; y<6; y++){
                 	myPersona.addGusto(items[y]);
                 }
-                if(myArray.size()==9999)
-                	myArray.redimencionar(10000);
-                	
+                //if(!myArray.contains(myPersona))//????pregunto por repetidos????	
                 myArray.add(myPersona);
                                 
             }
@@ -59,11 +62,65 @@ public class Main {
 		}
 	}
 	
+	public static void alta(Arreglo myArray){
+		long totalSum = 0;
+		
+		long inicioAlta = System.currentTimeMillis();
+		
+		String csvFile = "D:/Usuarios/Edu/Descargas/datasets/dataset_insert_10000.csv";
+        String line = "";
+        String cvsSplitBy = ";";
+        
+        int ciclo = 0;
+    	long peor = 0;
+    	
+        try {
+        	BufferedReader br = new BufferedReader(new FileReader(csvFile));   	
+        	while ((line = br.readLine()) != null){	
+        		long inicioCicloAlta = System.currentTimeMillis();
+                String[] items = line.split(cvsSplitBy);
+                //System.out.println(items[0]);
+                //creo la persona con sus gustos
+                Persona myPersona = new Persona(5); 
+                myPersona.setId(Integer.parseInt(items[0]));
+                //agrego los gustos
+                for(int y=1; y<6; y++){
+                	myPersona.addGusto(items[y]);
+                }
+                if(!myArray.contains(myPersona))//pregunto por si ya no esta agregado	
+                	myArray.add(myPersona);
+                long tiempoCiclo = (System.currentTimeMillis()-inicioCicloAlta);
+                //System.out.println("ciclo: " + ciclo + " tiempo" + tiempoCiclo);
+                if(tiempoCiclo>peor)
+                	peor=tiempoCiclo;
+                ciclo++;
+            }
+        	
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        totalSum = (System.currentTimeMillis()-inicioAlta);
+        System.out.println("peor: " + peor + " miliseg"); 
+        System.out.println("promedio: " + (totalSum/ciclo) + " miliseg");
+        System.out.println("total: "+getDurationBreakdown(totalSum));
+        
+	}
+	
+	public static void buscar(Arreglo myArray){
+		
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Arreglo myArreglo = new Arreglo(10000);
-		cargar(myArreglo);
-		imprimir(myArreglo);
+		//pre-cargo arreglo con 500000
+		cargar(myArreglo,"D:/Usuarios/Edu/Descargas/datasets/dataset_500000.csv");		
+		alta(myArreglo);
+		buscar(myArreglo);
+		
+		
+		//imprimir(myArreglo);
 	}
 
 }

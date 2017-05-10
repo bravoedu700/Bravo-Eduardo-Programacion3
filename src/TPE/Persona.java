@@ -44,5 +44,12 @@ public class Persona {
 		return res;
 	}
 	
+	public boolean equals(Persona p){
+		if(this.id==p.getId())
+			return true;
+		else
+			return false;
+	}
+	
 		
 }

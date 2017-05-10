@@ -14,20 +14,34 @@ public class Arreglo {
 }
  
  public void add(Object p){
-
+	 //pregunto si la cantidad de elementos del arreglos es menor al tamano
+	 if(this.arreglo.length>this.cantidad){//si es menor lo agrego
 		this.arreglo[this.cantidad] = p;
 		this.cantidad++;
+	 }
+	 else{//si no lo redimensiono
+		
+		int newtm = this.arreglo.length*2;
+		Object[] auxarreglo = new Object[newtm];
+		for(int w=0;w<this.arreglo.length;w++){
+			auxarreglo[w]=this.arreglo[w];
+		}				
+		this.arreglo = auxarreglo;
+		this.arreglo[this.cantidad] = p;
+		this.cantidad++;
+	 }
 	}
  
  public int size(){return this.cantidad;}
+ 
  public Object get(int i){return arreglo[i];}
  
- public void redimencionar(int newsize){
-	 
-	 Object[] tempArray = new Object[newsize];
-	 System.arraycopy(this.arreglo, 0, tempArray, 0, newsize);
-	 this.arreglo=tempArray;
-	 
+ public boolean contains(Object o){
+	 for(int y = 0; y<this.size(); y++){
+		 if(this.get(y).equals(o))
+			 return true;
+	 }
+	 return false;
  }
- 
+  
 }
