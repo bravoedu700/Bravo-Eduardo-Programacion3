@@ -195,11 +195,15 @@ public class Main2{
 		alta(mylista,path);
 		buscar(mylista,path);
 		
+		mylista = null;
+		System.gc();
 		mylista = new Lista();
 		cargar(mylista,path + "dataset_1000000.csv");
 		alta(mylista,path);
 		buscar(mylista,path);
 		
+		mylista = null;
+		System.gc();
 		mylista = new Lista();
 		cargar(mylista,path + "dataset_3000000.csv");
 		alta(mylista,path);

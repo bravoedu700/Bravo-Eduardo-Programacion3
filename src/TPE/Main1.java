@@ -8,6 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import java.util.SortedSet;
+import java.util.TreeSet;
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+
+
 public class Main1{
 	
 	public static void imprimir(Arreglo myArray){
@@ -63,6 +69,7 @@ public class Main1{
 				System.out.println("Error cerrando el BufferedWriter" + ex);
 			}
 		}
+		System.gc();
 	}
 	
 	public static void cargar(Arreglo myArray, String csvFile){
@@ -88,11 +95,11 @@ public class Main1{
                 long tiempoCiclo = (System.currentTimeMillis()-inicioCicloCarga);
                
             }
-        	
+        	br=null;
+        	System.gc();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
 	}
 		
 	public static void alta(Arreglo myArray,String path){
@@ -131,6 +138,8 @@ public class Main1{
                 	peor=tiempoCiclo;
                 ciclo++;
             }
+        	br=null;
+        	System.gc();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -190,9 +199,12 @@ public class Main1{
                 	peor=tiempoCiclo;
                 ciclo++;
             }
+        	br=null;
+        	System.gc();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
         totalSum = (System.currentTimeMillis()-inicioBusqueda);
         System.out.println("Peor Busqueda: " + peor + " miliseg"); 
         System.out.println("Promedio Busqueda: " + (totalSum/ciclo) + " miliseg");
@@ -207,6 +219,8 @@ public class Main1{
 	
 	public static void main(String[] args){
 		// TODO Auto-generated method stub
+		//String test1= JOptionPane.showInputDialog("Por favor ingrese la ruta de la carpeta");
+		
 		Arreglo myArreglo = new Arreglo(10000);
 		String path = "D:/Usuarios/Edu/Descargas/datasets/";
 		//String path = "/Users/fernandostoessel/Downloads/datasets/";
@@ -217,12 +231,16 @@ public class Main1{
 		buscar(myArreglo,path);
 		
 		//pre-cargo arreglo con 1000000
+		myArreglo = null;
+		System.gc();
 		myArreglo = new Arreglo(10000);
 		cargar(myArreglo,path + "dataset_1000000.csv");
 		alta(myArreglo,path);
 		buscar(myArreglo,path);
 		
 		//pre-cargo arreglo con 3000000
+		myArreglo = null;
+		System.gc();
 		myArreglo = new Arreglo(10000);
 		cargar(myArreglo,path + "dataset_3000000.csv");
 		alta(myArreglo,path);
