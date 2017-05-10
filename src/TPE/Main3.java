@@ -8,8 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class Main2{
-	
+public class Main3{
+
 	public static String getDurationBreakdown(long millis) {
 	    if(millis < 0) {
 	      throw new IllegalArgumentException("La duraci—n debe ser mayor que cero");
@@ -71,13 +71,14 @@ public class Main2{
                 	myPersona.addGusto(items[y]);
                 }
                 //if(!myArray.contains(myPersona))//????pregunto por repetidos????	
-                myList.addPrincipio(myPersona);
-                long tiempoCiclo = (System.currentTimeMillis()-inicioCicloCarga);
+                myList.addFinal(myPersona);
+                
             }
         	
         } catch (IOException e) {
             e.printStackTrace();
-        }        
+        }
+        
 	}
 	
 	public static void alta(Lista myList){
@@ -127,7 +128,7 @@ public class Main2{
         resumen += "Promedio Alta: " + (totalTiempo/ciclo) + " miliseg -";
         resumen += "Total Alta: "+getDurationBreakdown(totalTiempo) + "-";
         
-        escribirArchivo(resumen,"/Users/fernandostoessel/Downloads/datasets/salidaAltaListaPrincipio"+ tmn +".csv");
+        escribirArchivo(resumen,"/Users/fernandostoessel/Downloads/datasets/salidaAltaListaFinal"+ tmn +".csv");
 	}
 	
 	public static void buscar(Lista myList){
@@ -150,6 +151,7 @@ public class Main2{
         	BufferedReader br = new BufferedReader(new FileReader(csvFile));   	
         	while ((line = br.readLine()) != null){	
         		long inicioBusqueda = System.currentTimeMillis();
+        		long inicioCicloBusqueda = System.currentTimeMillis();
                 String[] items = line.split(cvsSplitBy);
                 //System.out.println(items[0]);
                 //creo la persona con sus gustos
@@ -165,7 +167,6 @@ public class Main2{
                 else{
                 	resultado="no";
                 }
-                
                 long tiempoCiclo = (System.currentTimeMillis()-inicioBusqueda);
                 totalTiempo=totalTiempo+tiempoCiclo;
                 resumen +=  ciclo + ";" + tiempoCiclo + ";" + resultado + "-";
@@ -185,7 +186,7 @@ public class Main2{
         resumen += "Promedio Busqueda: " + (totalTiempo/ciclo) + " miliseg -";
         resumen += "Total Busqueda: "+getDurationBreakdown(totalTiempo)+" -";
         
-        escribirArchivo(resumen,"/Users/fernandostoessel/Downloads/datasets/salidaBusquedaListaPrincipio" + tmn + ".csv");
+        escribirArchivo(resumen,"/Users/fernandostoessel/Downloads/datasets/salidaBusquedaListaFinal"+tmn+".csv");
 	}
 	
 	public static void main(String[] args) {

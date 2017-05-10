@@ -1,7 +1,5 @@
 package TPE;
 
-//import javax.swing.*;
- 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class Main1 {
+public class Main1{
 	
 	public static void imprimir(Arreglo myArray){
 		for(int u=0; u<myArray.size(); u++){
@@ -36,9 +34,8 @@ public class Main1 {
 	}
 
 	public static void escribirArchivo(String resultado,String url){
-		String lineas[] = new String[1200];
 		
-		lineas = resultado.split("|");
+		String[] lineas = resultado.split("(?<=-)");
 		
 		BufferedWriter bw = null;
 		try {
@@ -71,11 +68,7 @@ public class Main1 {
 	public static void cargar(Arreglo myArray, String csvFile){
         String line = "";
         String cvsSplitBy = ";";
-        long finCarga = 0;
-		long inicioCarga = System.currentTimeMillis();
-		int ciclo = 0;
-    	long peor = 0;
-    	System.out.println("Resumen Carga en Arreglo: ---------------------------------------");    	
+          	
         try {
         	BufferedReader br = new BufferedReader(new FileReader(csvFile));
         	//quito el primer elemento ya que es la cabezera 
@@ -93,24 +86,19 @@ public class Main1 {
                 //if(!myArray.contains(myPersona))//????pregunto por repetidos????	
                 myArray.add(myPersona);
                 long tiempoCiclo = (System.currentTimeMillis()-inicioCicloCarga);
-                if(tiempoCiclo>peor)
-                	peor=tiempoCiclo;
-                ciclo++;
+               
             }
         	
         } catch (IOException e) {
             e.printStackTrace();
         }
-        finCarga = (System.currentTimeMillis()-inicioCarga);
-        System.out.println("Peor Carga: " + peor + " miliseg"); 
-        System.out.println("Promedio Alta: " + (finCarga/ciclo) + " miliseg");
-        System.out.println("Total Alta: "+getDurationBreakdown(finCarga));
         
 	}
 		
 	public static void alta(Arreglo myArray){
+		int tmn = myArray.size()+1;
 		String resumen = "";
-		long totalSum = 0;
+		long totalTiempo = 0;
 		//String csvFile = "D:/Usuarios/Edu/Descargas/datasets/dataset_insert_10000.csv";
 		String csvFile = "/Users/fernandostoessel/Downloads/datasets/dataset_insert_10000.csv";
         String line = "";
@@ -120,9 +108,9 @@ public class Main1 {
     	int ciclo = 0;
     	
     	System.out.println("Resumen Alta: ------------------------------------------");
-    	resumen += "Resumen Alta: ------------------------------------------ |"; 
-    	resumen += "Tiempos de Altas: ------------------------------------------ |";
-    	resumen += "Ciclo Alta; tiempo |";
+    	resumen += "Resumen Alta: -"; 
+    	resumen += "Tiempos de Altas: -";
+    	resumen += "Ciclo Alta; tiempo -"; 
         try {
         	BufferedReader br = new BufferedReader(new FileReader(csvFile));   	       	
         	while ((line = br.readLine()) != null){	
@@ -137,8 +125,8 @@ public class Main1 {
                 }
                 myArray.add(myPersona);
                 long tiempoCiclo = (System.currentTimeMillis()-inicioCicloAlta);
-                totalSum=totalSum+tiempoCiclo;
-                resumen +=  ciclo + ";" + tiempoCiclo + " |";
+                totalTiempo=totalTiempo+tiempoCiclo;
+                resumen +=  ciclo + ";" + tiempoCiclo + " -";
                 if(tiempoCiclo>peor)
                 	peor=tiempoCiclo;
                 ciclo++;
@@ -147,18 +135,20 @@ public class Main1 {
             e.printStackTrace();
         }
         
-        System.out.println("Peor Alta: " + peor + " miliseg"); 
-        System.out.println("Promedio Alta: " + (totalSum/ciclo) + " miliseg");
-        System.out.println("Total Alta: "+getDurationBreakdown(totalSum));
+        System.out.println("Total Tiempo: " + totalTiempo + " miliseg");
+        System.out.println("Peor Alta: " + peor + " miliseg");
+        System.out.println("Promedio Alta: " + (totalTiempo/ciclo) + " miliseg");
+        System.out.println("Total Alta: "+getDurationBreakdown(totalTiempo));
         
-        resumen += "Peor Alta: " + peor + " miliseg |";
-        resumen += "Promedio Alta: " + (totalSum/ciclo) + " miliseg |";
-        resumen += "Total Alta: "+getDurationBreakdown(totalSum)+" |";
+        resumen += "Peor Alta: " + peor + " miliseg -";
+        resumen += "Promedio Alta: " + (totalTiempo/ciclo) + " miliseg -";
+        resumen += "Total Alta: "+getDurationBreakdown(totalTiempo)+" -";
         
-        escribirArchivo(resumen,"/Users/fernandostoessel/Downloads/datasets/salidaAlta.csv");
+        escribirArchivo(resumen,"/Users/fernandostoessel/Downloads/datasets/salidaAlta" + tmn + ".csv");
 	}
 	
 	public static void buscar(Arreglo myArray){
+		int tmn = myArray.size()+1;
 		String resumen = "";
 		long totalSum = 0;
 		long inicioBusqueda = System.currentTimeMillis();
@@ -171,10 +161,9 @@ public class Main1 {
     	String resultado;
     	System.out.println("Resumen Busqueda: --------------------------------------------");
     	
-    	resumen += "Resumen Busqueda: ------------------------------------------ |";
-    	resumen += "Tiempos de Busquedas: ------------------------------------------ |";
-    	
-    	resumen += "Ciclo Busqueda; Riempo; Resultado |";
+    	resumen += "Resumen Busqueda:-";
+    	resumen += "Tiempos de Busquedas:-";
+    	resumen += "Ciclo Busqueda; Tiempo; Resultado-";
         
     	try {
         	BufferedReader br = new BufferedReader(new FileReader(csvFile));   	
@@ -195,12 +184,9 @@ public class Main1 {
                 else{
                 	resultado="no";
                 }
-                System.out.println("ciclo: " + ciclo + " esta? " + resultado);
+                //System.out.println("ciclo: " + ciclo + " esta? " + resultado + "-");
                 long tiempoCiclo = (System.currentTimeMillis()-inicioCicloBusqueda);
-                
-                resumen +=  ciclo + ";" + tiempoCiclo + ";" + resultado + " |";
-                
-                
+                resumen +=  ciclo + ";" + tiempoCiclo + ";" + resultado + "-";
                 if(tiempoCiclo>peor)
                 	peor=tiempoCiclo;
                 ciclo++;
@@ -213,11 +199,11 @@ public class Main1 {
         System.out.println("Promedio Busqueda: " + (totalSum/ciclo) + " miliseg");
         System.out.println("Total Busqueda: "+getDurationBreakdown(totalSum));
         
-        resumen += "Peor Busqueda: " + peor + " miliseg |";
-        resumen += "Promedio Busqueda: " + (totalSum/ciclo) + " miliseg |";
-        resumen += "Total Busqueda: "+getDurationBreakdown(totalSum)+"|";
+        resumen += "Peor Busqueda: " + peor + " miliseg -";
+        resumen += "Promedio Busqueda: " + (totalSum/ciclo) + " miliseg -";
+        resumen += "Total Busqueda: "+getDurationBreakdown(totalSum)+" -";
         
-        escribirArchivo(resumen,"/Users/fernandostoessel/Downloads/datasets/salidaBusqueda.csv");
+        escribirArchivo(resumen,"/Users/fernandostoessel/Downloads/datasets/salidaBusqueda" + tmn + ".csv");
 	}
 	
 	public static void main(String[] args){
@@ -227,8 +213,19 @@ public class Main1 {
 		//cargar(myArreglo,"D:/Usuarios/Edu/Descargas/datasets/dataset_500000.csv");
 		cargar(myArreglo,"/Users/fernandostoessel/Downloads/datasets/dataset_500000.csv");
 		alta(myArreglo);
-		//buscar(myArreglo);
-		//imprimir(myArreglo);	
+		buscar(myArreglo);
+		
+		myArreglo = new Arreglo(10000);
+		cargar(myArreglo,"/Users/fernandostoessel/Downloads/datasets/dataset_1000000.csv");
+		alta(myArreglo);
+		buscar(myArreglo);
+		
+		myArreglo = new Arreglo(10000);
+		cargar(myArreglo,"/Users/fernandostoessel/Downloads/datasets/dataset_3000000.csv");
+		alta(myArreglo);
+		buscar(myArreglo);
+		
+		
 	}
 
 }

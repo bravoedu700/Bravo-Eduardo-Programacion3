@@ -44,7 +44,6 @@ public class Persona {
 	}
 	
 	public boolean equals(Persona p){
-		//System.out.println("esta: " + this.id + " biene " + p.getId());
 		if(this.id==p.getId())
 			return true;
 		else
