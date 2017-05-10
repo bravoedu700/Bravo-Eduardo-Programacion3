@@ -6,16 +6,16 @@ import java.util.List;
  
 public class Mochila { 
     private List<Objeto> listaObjetos; 
-    private int pesoMáximo; 
+    private int pesoMaximo; 
      
     public Mochila(){ 
         listaObjetos = new LinkedList<Objeto>(); 
-        pesoMáximo = 0; 
+        pesoMaximo = 0; 
     } 
      
-    public Mochila(List<Objeto> listaObjetos, int pesoMáximo){ 
+    public Mochila(List<Objeto> listaObjetos, int pesoMaximo){ 
         this.listaObjetos = new LinkedList<Objeto>(listaObjetos);  
-        this.pesoMáximo = pesoMáximo; 
+        this.pesoMaximo = pesoMaximo; 
     } 
      
     public List<Objeto> resolver(){ 
@@ -23,9 +23,9 @@ public class Mochila {
         Collections.sort(listaObjetos); 
 //        System.out.println(listaObjetos); 
         int totalPeso = 0; 
-        while(!listaObjetos.isEmpty() && totalPeso < pesoMáximo){ 
+        while(!listaObjetos.isEmpty() && totalPeso < pesoMaximo){ 
             Objeto o = listaObjetos.get(0); 
-            if((totalPeso + o.peso <= pesoMáximo)&&(o.cantidad>0)){ 
+            if((totalPeso + o.peso <= pesoMaximo)&&(o.cantidad>0)){ 
                 res.add(o); 
                 o.cantidad--;
                 listaObjetos.remove(0);
@@ -39,7 +39,7 @@ public class Mochila {
     } 
      
     public String toString(){ 
-        String res = "Peso máximo: " + pesoMáximo + "\nLista de objetos: "; 
+        String res = "Peso máximo: " + pesoMaximo + "\nLista de objetos: "; 
         res += listaObjetos.toString(); 
          
         return res; 

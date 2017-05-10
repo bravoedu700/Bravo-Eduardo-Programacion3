@@ -1,6 +1,5 @@
 package TPE;
 
-
 public class Persona {
 	private int id;
 	private String[] gutos;
@@ -45,6 +44,7 @@ public class Persona {
 	}
 	
 	public boolean equals(Persona p){
+		//System.out.println("esta: " + this.id + " biene " + p.getId());
 		if(this.id==p.getId())
 			return true;
 		else
