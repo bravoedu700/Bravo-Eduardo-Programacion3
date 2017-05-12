@@ -7,9 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
 import java.util.SortedSet;
 import java.util.TreeSet;
+
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 
@@ -26,16 +26,14 @@ public class Main1{
 	    if(millis < 0) {
 	      throw new IllegalArgumentException("La duraci—n debe ser mayor que cero");
 	    }
-	    //long days = TimeUnit.MILLISECONDS.toDays(millis);
-	    //millis -= TimeUnit.DAYS.toMillis(days);
-	    //long hours = TimeUnit.MILLISECONDS.toHours(millis);
-	    //millis -= TimeUnit.HOURS.toMillis(hours);
+	    
 	    long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
 	    millis -= TimeUnit.MINUTES.toMillis(minutes);
 	    long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
-
+	    millis -= TimeUnit.SECONDS.toMillis(seconds);
+	    
 	    String sb = new String();
-	    sb=" Minutes: " + minutes +" Seconds: " + seconds;
+	    sb=" Minutes: " + minutes +" Seconds: " + seconds + " Milisec: " + millis;
 	    return sb;
 	}
 
@@ -153,7 +151,7 @@ public class Main1{
         resumen += "Promedio Alta: " + (totalTiempo/ciclo) + " miliseg -";
         resumen += "Total Alta: "+getDurationBreakdown(totalTiempo)+" -";
         
-        escribirArchivo(resumen,path + "salidaAlta" + tmn + ".csv");
+        escribirArchivo(resumen,path + "salidaAltaArreglo" + tmn + ".csv");
 	}
 	
 	public static void buscar(Arreglo myArray, String path){
@@ -214,17 +212,14 @@ public class Main1{
         resumen += "Promedio Busqueda: " + (totalSum/ciclo) + " miliseg -";
         resumen += "Total Busqueda: "+getDurationBreakdown(totalSum)+" -";
         
-        escribirArchivo(resumen,path + "salidaBusqueda" + tmn + ".csv");
+        escribirArchivo(resumen,path + "salidaBusquedaArreglo" + tmn + ".csv");
 	}
 	
 	public static void main(String[] args){
 		// TODO Auto-generated method stub
-		//String test1= JOptionPane.showInputDialog("Por favor ingrese la ruta de la carpeta");
-		
 		Arreglo myArreglo = new Arreglo(10000);
-		String path = "D:/Usuarios/Edu/Descargas/datasets/";
-		//String path = "/Users/fernandostoessel/Downloads/datasets/";
-		
+		String path= JOptionPane.showInputDialog("Por favor ingrese la ruta de la carpeta, para leer y escribir");
+
 		//pre-cargo arreglo con 500000
 		cargar(myArreglo,path + "dataset_500000.csv");
 		alta(myArreglo,path);

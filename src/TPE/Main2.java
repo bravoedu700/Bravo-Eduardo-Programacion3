@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.JOptionPane;
+
 public class Main2{
 	
 	public static String getDurationBreakdown(long millis) {
@@ -17,9 +19,10 @@ public class Main2{
 	    long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
 	    millis -= TimeUnit.MINUTES.toMillis(minutes);
 	    long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
-
+	    millis -= TimeUnit.SECONDS.toMillis(seconds);
+	    
 	    String sb = new String();
-	    sb=" Minutes: " + minutes +" Seconds: " + seconds;
+	    sb=" Minutes: " + minutes +" Seconds: " + seconds + " Milisec: " + millis;
 	    return sb;
 	}
 	
@@ -187,8 +190,7 @@ public class Main2{
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String path = "D:/Usuarios/Edu/Descargas/datasets/";
-		//String path = "/Users/fernandostoessel/Downloads/datasets/";
+		String path= JOptionPane.showInputDialog("Por favor ingrese la ruta de la carpeta, para leer y escribir");
 		
 		Lista mylista = new Lista();
 		cargar(mylista,path + "dataset_500000.csv");
