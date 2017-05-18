@@ -2,7 +2,6 @@ package practico2;
 public class arreglo {
 
 	private int[] arreglo;
-	private int[] aux;
 	private int cantidad;
  
  public arreglo(int size){

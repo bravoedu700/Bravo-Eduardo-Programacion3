@@ -20,7 +20,7 @@ public class Main3{
 	    millis -= TimeUnit.MINUTES.toMillis(minutes);
 	    long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
 	    millis -= TimeUnit.SECONDS.toMillis(seconds);
-	    
+	     
 	    String sb = new String();
 	    sb=" Minutes: " + minutes +" Seconds: " + seconds + " Milisec: " + millis;
 	    return sb;
