@@ -50,5 +50,17 @@ public class Persona {
 			return false;
 	}
 	
+	public int compareTo(Persona p){
+		if(this.id==p.getId())
+			return 0;
+		else
+			if(this.id > p.getId())
+				return 1;
+			else
+				return -1;
+	}
+	
+	
+	
 		
 }
