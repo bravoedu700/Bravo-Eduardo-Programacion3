@@ -51,25 +51,22 @@ public class GrafoGustos extends Grafo {
     	return (n.getTipo() == 1);
     }
     
-
-    public ArrayList<Nodo> personasGustoComun(Nodo usuario) {    	
-    	ArrayList<Nodo> gustos = usuario.getVecinos();    	
+    public ArrayList<Nodo> personasGustoComun(Nodo usuario){   	
         ArrayList<Nodo> personas = new ArrayList<Nodo>();
     	Nodo n;
-    	//System.out.println("cantidad de gustos del usuario elegido al azar: " + gustos.size() );
     	Iterator<Nodo> e = this.getNodos().iterator();
     	
 		while(e.hasNext()){
 			n = e.next();
 			if((n != usuario)&&(n.getTipo()==1)){				
 				Iterator <Nodo> gustos1 = n.getVecinos().iterator();
-				int cantidadIguales = 0;				
+				int cantidadIguales = 0;
 				while(gustos1.hasNext()){														
-					if(gustos.contains(gustos1.next())){
+					//if(gustos.contains(gustos1.next())){
+					if(gustos1.next().contains(usuario)){
 						cantidadIguales=cantidadIguales+1;
 						}
 				}
-			//System.out.println("cantidadIguales: " + cantidadIguales);
 			if(cantidadIguales >= 2)
 				personas.add(n);
 			}

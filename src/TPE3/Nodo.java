@@ -36,9 +36,9 @@ public class Nodo {
 		this.tipo = tipo;
 	}
 	public boolean equals(Nodo n){
-		return ((n.valor == this.valor)&&(n.tipo == this.tipo)); 
+		return ((this.valor.equals(n.valor))&&(n.tipo == this.tipo)); 
 	}
-	public boolean contains(Nodo n){	
+	public boolean contains(Nodo n){
 		return vecinos.contains(n);
 	}
 	public String toString(){
