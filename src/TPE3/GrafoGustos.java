@@ -53,22 +53,18 @@ public class GrafoGustos extends Grafo {
     
     public ArrayList<Nodo> personasGustoComun(Nodo usuario){   	
         ArrayList<Nodo> personas = new ArrayList<Nodo>();
-        ArrayList<Nodo> gustos = usuario.getVecinos();
-    	Nodo n;
-    	Iterator<Nodo> e = this.getNodos().iterator();
-		while(e.hasNext()){
-			n = e.next();
-			if((n != usuario)&&(n.getTipo()==1)){		
-				Iterator <Nodo> gustos1 = n.getVecinos().iterator();
-				int cantidadIguales = 0;
-				while(gustos1.hasNext()){														
-					if(gustos.contains(gustos1.next())){
+    	int cantidadIguales = 0;
+    	for(int g=0; g<this.getNodos().size();g++){
+    		if(( !this.getNodos().get(g).equals(usuario) ) &&(this.getNodos().get(g).getTipo()==1)){
+    			//System.out.println(this.getNodos().get(g)+"\n");
+    			for(int r=0; r < usuario.getVecinos().size(); r++){
+    				if(usuario.getVecinos().get(r).containsVecino(this.getNodos().get(g))){
 						cantidadIguales++;
-						}
-				}
-			if(cantidadIguales >= 2)
-				personas.add(n);
-			}
+					}
+    			}
+    		if(cantidadIguales >= 2)
+    			personas.add(this.getNodos().get(g));
+    		}
     	}
         return personas;
     }

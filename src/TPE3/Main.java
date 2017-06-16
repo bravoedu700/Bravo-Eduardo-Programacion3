@@ -9,19 +9,25 @@ import javax.swing.JOptionPane;
 public class Main {
 
 	public static void MostrarLista(ArrayList<Nodo> listado){
-		Iterator <Nodo> i = listado.iterator();		
-		System.out.println("Lista:");
-		while(i.hasNext()){
-			System.out.println(i.next().toString());
+		if(listado.size()>0){
+			Iterator <Nodo> i = listado.iterator();		
+			System.out.println("Lista:");
+			while(i.hasNext()){
+				System.out.println(i.next().toString());
+			}
+			System.out.println("");
 		}
-		System.out.println("");
-
+		else{
+			System.out.println("Sin USUARIOS con los mismos gustos");
+		}
 	}
 
 	public static void main(String[] args){
 		// TODO Auto-generated method stub  71095014
 		// /Users/fernandostoessel/Downloads/datasets/
 		String path= JOptionPane.showInputDialog("Por favor ingrese la ruta de la carpeta, para leer y escribir");
+		//String path="/Users/fernandostoessel/Downloads/datasets/";
+		
 		if(path!=null){
 			Archivo miArchivo = new Archivo(path);
 			GrafoGustos g = new GrafoGustos();
