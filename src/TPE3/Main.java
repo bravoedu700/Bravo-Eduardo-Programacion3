@@ -25,8 +25,8 @@ public class Main {
 	public static void main(String[] args){
 		// TODO Auto-generated method stub  71095014
 		// /Users/fernandostoessel/Downloads/datasets/
-		//String path= JOptionPane.showInputDialog("Por favor ingrese la ruta de la carpeta, para leer y escribir");
-		String path="/Users/fernandostoessel/Downloads/datasets/";
+		String path= JOptionPane.showInputDialog("Por favor ingrese la ruta de la carpeta, para leer y escribir");
+		//String path="/Users/fernandostoessel/Downloads/datasets/";
 		
 		if(path!=null){
 			Archivo miArchivo = new Archivo(path);
