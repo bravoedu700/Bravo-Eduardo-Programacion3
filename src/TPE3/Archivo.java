@@ -24,7 +24,7 @@ public class Archivo {
         	//quito el primer elemento ya que es la cabezera 
         	line = br.readLine();
         	int i = 0;
-        	while (((line = br.readLine()) != null)&&(i <= 50000)){  
+        	while (((line = br.readLine()) != null)&&(i <= 20000)){  
         		long inicioCicloCarga = System.currentTimeMillis();
                 String[] items = line.split(cvsSplitBy);
                 //creo el nodo con sus gustos

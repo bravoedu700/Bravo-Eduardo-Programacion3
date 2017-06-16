@@ -53,18 +53,17 @@ public class GrafoGustos extends Grafo {
     
     public ArrayList<Nodo> personasGustoComun(Nodo usuario){   	
         ArrayList<Nodo> personas = new ArrayList<Nodo>();
+        ArrayList<Nodo> gustos = usuario.getVecinos();
     	Nodo n;
     	Iterator<Nodo> e = this.getNodos().iterator();
-    	
 		while(e.hasNext()){
 			n = e.next();
-			if((n != usuario)&&(n.getTipo()==1)){				
+			if((n != usuario)&&(n.getTipo()==1)){		
 				Iterator <Nodo> gustos1 = n.getVecinos().iterator();
 				int cantidadIguales = 0;
 				while(gustos1.hasNext()){														
-					//if(gustos.contains(gustos1.next())){
-					if(gustos1.next().contains(usuario)){
-						cantidadIguales=cantidadIguales+1;
+					if(gustos.contains(gustos1.next())){
+						cantidadIguales++;
 						}
 				}
 			if(cantidadIguales >= 2)
@@ -145,10 +144,14 @@ public class GrafoGustos extends Grafo {
     
     public Nodo usuarioAlAzar(){
     	Iterator<Nodo> e = this.getNodos().iterator();
+    	int i = 0;
     	while(e.hasNext()){
 			Nodo n = e.next();
-			if(n.getTipo() == 1)
-				return n;
+			if((n.getTipo() == 1)){
+				i++;
+				if(i==30)
+					return n;
+			}
     	}
     	return null;
     }

@@ -16,7 +16,7 @@ public class Grafo {
 		n1.addVecino(n2);
 	}
 	public boolean esvecino(Nodo n1, Nodo n2){
-		return n1.contains(n2);
+		return n1.containsVecino(n2);
 	}
 	public ArrayList<Nodo> getNodos(){
 		return this.Nodos;

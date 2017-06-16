@@ -35,12 +35,20 @@ public class Nodo {
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
+	
 	public boolean equals(Nodo n){
 		return ((this.valor.equals(n.valor))&&(n.tipo == this.tipo)); 
 	}
-	public boolean contains(Nodo n){
-		return vecinos.contains(n);
+	
+	public boolean containsVecino(Nodo n){	
+		for(int y=0; y<this.vecinos.size(); y++){		
+			if(this.vecinos.get(y).equals(n)){
+				return true;
+			}
+		}
+		return false;
 	}
+	
 	public String toString(){
 		if(this.tipo == 1)
 			return "Usuario: " + this.valor;
