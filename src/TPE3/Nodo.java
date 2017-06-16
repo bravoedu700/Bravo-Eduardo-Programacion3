@@ -43,13 +43,13 @@ public class Nodo {
 	public boolean containsVecino(Nodo n){	
 		//return true;
 		//System.out.println("busca:"+n.toString()+"\n");
+		//System.out.println("arreglo a buscar :"+this.getVecinos().toString() +"\n");
 		
-		
-		for(int y=0; y<this.vecinos.size(); y++){
+		for(int y=0; y<this.getVecinos().size(); y++){
 			
 			//System.out.println("En:"+this.vecinos.get(y)+"\n");
 			
-			if(this.vecinos.get(y).equals(n)){
+			if(this.getVecinos().get(y).equals(n)){
 				return true;
 			}
 		}

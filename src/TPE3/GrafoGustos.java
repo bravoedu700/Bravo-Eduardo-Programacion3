@@ -8,7 +8,7 @@ public class GrafoGustos extends Grafo {
 		
     public Nodo addUsuario(String idUsuario) {
     	Nodo usuario = new Nodo(idUsuario, 1);
-    	if (!this.contains(usuario)){
+    	if (!this.getNodos().contains(usuario)){
             this.addNodo(usuario);
         }
     	return usuario;
@@ -16,17 +16,27 @@ public class GrafoGustos extends Grafo {
 
     public Nodo addGusto(String idGusto) {
     	Nodo gusto = new Nodo(idGusto, 2);
-    	if (!this.contains(gusto)){
-            this.addNodo(gusto);
-        }
+    	//System.out.println("gusto a agregar:" + gusto.getValor()+ " tipo:" + gusto.getTipo());
+    	boolean noEsta = true;
+    	for(int h=0; h < this.getNodos().size(); h++){
+    		if(this.getNodos().get(h).equals(gusto)){
+    			noEsta=false;
+    			gusto = this.getNodos().get(h);
+    			h = this.getNodos().size();
+    		}
+    	}   	
+    	if(noEsta)
+           this.addNodo(gusto);
+       
     	return gusto;
+    	
     }
 
     public void insertarArista(Nodo n1, Nodo n2) {
     	if(n1.getTipo() != n2.getTipo()){
-    		if(!this.contains(n1)) 
+    		if(!this.getNodos().contains(n1)) 
     			this.addNodo(n1);
-    		if(!this.contains(n2)) 
+    		if(!this.getNodos().contains(n2)) 
     			this.addNodo(n2);    		
 			n1.addVecino(n2);
 			n2.addVecino(n1);
@@ -35,12 +45,12 @@ public class GrafoGustos extends Grafo {
     
     public boolean existeGusto(String idGusto) {
     	Nodo gusto = new Nodo(idGusto, 2);
-    	return this.contains(gusto);
+    	return this.getNodos().contains(gusto);
     }
 
     public boolean existeUsuario(String idUsuario) {
     	Nodo usuario = new Nodo(idUsuario, 1);
-    	return this.contains(usuario);
+    	return this.getNodos().contains(usuario);
     }
     
     public boolean esGusto(Nodo n){
@@ -55,7 +65,7 @@ public class GrafoGustos extends Grafo {
         ArrayList<Nodo> personas = new ArrayList<Nodo>();
     	int cantidadIguales = 0;
     	for(int g=0; g<this.getNodos().size();g++){
-    		if(( !this.getNodos().get(g).equals(usuario) ) &&(this.getNodos().get(g).getTipo()==1)){
+    		if(( !this.getNodos().get(g).equals(usuario) ) && (this.getNodos().get(g).getTipo()==1)){
     			//System.out.println(this.getNodos().get(g)+"\n");
     			for(int r=0; r < usuario.getVecinos().size(); r++){
     				if(usuario.getVecinos().get(r).containsVecino(this.getNodos().get(g))){
@@ -151,4 +161,15 @@ public class GrafoGustos extends Grafo {
     	}
     	return null;
     }
+    
+    public String toString(){
+    	String resultado="";
+    	for(int f=0; f<this.getNodos().size(); f++){
+    		resultado +=  this.getNodos().get(f).toString() + "\n";
+    		for(int r=0; r<this.getNodos().get(f).getVecinos().size(); r++){
+    			resultado +=  "         " + this.getNodos().get(f).getVecinos().get(r).toString() + "\n";
+    		}
+    	}
+    	return resultado;
+    } 
 }

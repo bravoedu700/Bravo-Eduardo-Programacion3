@@ -25,8 +25,8 @@ public class Main {
 	public static void main(String[] args){
 		// TODO Auto-generated method stub  71095014
 		// /Users/fernandostoessel/Downloads/datasets/
-		String path= JOptionPane.showInputDialog("Por favor ingrese la ruta de la carpeta, para leer y escribir");
-		//String path="/Users/fernandostoessel/Downloads/datasets/";
+		//String path= JOptionPane.showInputDialog("Por favor ingrese la ruta de la carpeta, para leer y escribir");
+		String path="/Users/fernandostoessel/Downloads/datasets/";
 		
 		if(path!=null){
 			Archivo miArchivo = new Archivo(path);
@@ -36,6 +36,8 @@ public class Main {
 			miArchivo.cargar(g, "dataset_500000.csv");
 			System.out.println("Fin Carga del Grafo: ------------------------------------------ \n");
 	
+			//System.out.println(g.toString());
+			
 			Nodo usuario=g.usuarioAlAzar();
 			System.out.println(usuario.toString()+" utilizado para las pruebas \n");
 			

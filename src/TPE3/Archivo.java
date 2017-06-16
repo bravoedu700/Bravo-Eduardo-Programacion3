@@ -24,13 +24,15 @@ public class Archivo {
         	//quito el primer elemento ya que es la cabezera 
         	line = br.readLine();
         	int i = 0;
-        	while (((line = br.readLine()) != null)&&(i <= 20000)){  
+        	while (((line = br.readLine()) != null)&&(i <= 1000)){  
         		long inicioCicloCarga = System.currentTimeMillis();
                 String[] items = line.split(cvsSplitBy);
                 //creo el nodo con sus gustos
                 Nodo n1 = g.addUsuario(items[0]);
+                //System.out.println("insertado: " + n1.toString());
                 for(int y=1; y<6; y++){    	
                 	Nodo n2 = g.addGusto(items[y]);
+                	//System.out.println("insertado: " + n2.toString());
                 	g.insertarArista(n1, n2);
                 }
                 long tiempoCiclo = (System.currentTimeMillis()-inicioCicloCarga);
